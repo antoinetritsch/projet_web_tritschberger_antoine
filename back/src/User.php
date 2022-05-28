@@ -14,53 +14,53 @@ class User
      * @ORM\Id
      * @ORM\Column(type="string")
      */
-    protected $login;
+    public $login;
 	
     /**
      * @ORM\Column(type="string")
      */
-    protected $name;
+    public $name;
 	
 	
 	/**
      * @ORM\Column(type="string")
      */
-    protected $lastname;
+    public $lastname;
 	
 	/**
      * @ORM\Column(type="string")
      */
-    protected $phoneNumber;
+    public $phoneNumber;
 	
 	/**
      * @ORM\Column(type="string")
      */
-    protected $address;
+    public $address;
 	
 	
 	/**
      * @ORM\Column(type="integer")
      */
-    protected $codePostal;
+    public $codePostal;
 	
 	
 	/**
      * @ORM\Column(type="string")
      */
-    protected $city;
+    public $city;
 	
 	
 	/**
      * @ORM\Column(type="string")
      */
-    protected $country;
+    public $country;
 	
 	
 	
 	/**
      * @ORM\Column(type="string")
      */
-    protected $civilite;
+    public $civilite;
 	
 	
 	/**

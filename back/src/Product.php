@@ -17,22 +17,22 @@ class Product
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
      */
-    protected $idProduct;
+    public $idProduct;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $name;
+    public $name;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $description;
+    public $description;
 
     /**
      * @ORM\Column(type="float")
      */
-    protected $price;
+    public $price;
 
 
 
