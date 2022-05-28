@@ -1,0 +1,10 @@
+<div>
+    <ul>
+        <li [ngClass]="currentRoute=='/login/signup' ? 'selected' : ''"><a [routerLink] = "['/login/signup']" >S'inscrire</a></li>
+        <li [ngClass]="currentRoute=='/login/signin' ? 'selected' : ''"><a [routerLink] = "['/login/signin']" >Se connecter</a></li>
+        <li [ngClass]="currentRoute=='/home' ? 'selected' : ''" ><a [routerLink] = "['/home']" >Home</a></li>
+        <li [ngClass]="currentRoute=='/product/shop' ? 'selected' : ''"><a [routerLink] = "['/product/shop']" >Boutique</a></li>
+        <li [ngClass]="currentRoute=='/product/cart' ? 'selected' : ''"><a [routerLink] = "['/product/cart']" >Panier (<span *ngIf="productsLength$ | async as productsLength">{{productsLength}}</span><span *ngIf="!(productsLength$ | async)">0</span>)</a></li>
+        <li [ngClass]="currentRoute=='/address/addresses' ? 'selected' : ''"><a [routerLink] = "['/address/addresses']" >Adresse</a></li>
+    </ul>
+</div>

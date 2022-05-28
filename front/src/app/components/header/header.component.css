@@ -1,0 +1,9 @@
+.flex{
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(33, 170, 86, 0.925);
+}
+h1{
+    position: absolute;
+    left:45%;
+}

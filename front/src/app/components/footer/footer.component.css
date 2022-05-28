@@ -1,0 +1,10 @@
+div{
+    height: 100px;
+    width: 100%;
+    background-color: rgba(196, 196, 196, 0.699);
+    margin:0;
+    padding:0;
+    text-align: center;
+    line-height: 100px;
+    font-weight: bold;
+}

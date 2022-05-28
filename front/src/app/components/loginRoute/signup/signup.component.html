@@ -1,0 +1,27 @@
+<h3>Inscription</h3>
+<form>
+    <div>
+        <label [ngStyle]="{'color':user.IsCiviliteCorrect() == '' ? 'black' : 'red' }">Civilité*</label>
+        <div>
+            <input [(ngModel)]="user.civilite" type="radio" id="Mme" name="Civi" value="Madame">
+            <label for="mme">Madame</label><br>
+            <input [(ngModel)]="user.civilite" type="radio" id="Mr" name="Civi" checked value="Monsieur">
+            <label for="Mr">Monsieur</label><br>
+        </div>
+    </div>
+    <label [ngStyle]="{'color':user.IsLoginCorrect() == '' ? 'black' : 'red' }">Login* : <input name="login" [(ngModel)]="user.login" type="text" /></label><br />
+    <label [ngStyle]="{'color':user.IsPasswordCorrect() == '' ? 'black' : 'red' }">Password* : <input name="password" [(ngModel)]="user.password" type="text" /></label><br />
+    <label [ngStyle]="{'color':user.IsNameCorrect() == '' ? 'black' : 'red' }" >Nom* : <input name="name" [(ngModel)]="user.name" type="text" /></label> <br />
+    <label [ngStyle]="{'color':user.IsLastNameCorrect() == '' ? 'black' : 'red' }">Prénom* : <input name="lastname" [(ngModel)]="user.lastname" type="text" /></label><br />
+    <label [ngStyle]="{'color':user.IsNumberCorrect() == '' ? 'black' : 'red' }">Numéro de téléphone* : <input name="phoneNumber" [(ngModel)]="user.phoneNumber" type="tel" /></label><br />
+    <label>{{user.phoneNumber | phoneNumber}}</label><br />
+    <label [ngStyle]="{'color':user.IsOldCorrect() == '' ? 'black' : 'red' }">Age* : <input name="old" [(ngModel)]="user.old" type="number" /></label><br />
+    <label>Adresse : <input name="address" [(ngModel)]="user.address" type="text" /></label><br />
+    <label>Code postal : <input name="codePostal" [(ngModel)]="user.codePostal" type="number" /></label><br />
+    <label>Ville : <input name="city" [(ngModel)]="user.city" type="text" /></label><br />
+    <label>Pays : <input name="country" [(ngModel)]="user.country" type="text" /></label><br />
+    
+    <p *ngIf="user.IsCorrect()!=''" id="error">{{user.IsCorrect()}}</p>
+
+    <button *ngIf="user.IsCorrect()==''" (click)="onClick()">Envoyer</button>
+</form>

@@ -1,0 +1,48 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#item{
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: rgba(33, 170, 86, 0.925);
+    margin-bottom: 50px;
+    align-items: center;
+    width:30rem;
+}
+#sousItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#item>h3>span{
+    background-color: rgba(77, 77, 77, 0.644);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#item>h3{
+    font-weight: bold;
+}
+
+.btnStyle{
+    padding: 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    background: none;
+    cursor: pointer;
+    border: black solid 2px;
+    color:black;
+}
+
+
+
+#listItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}

@@ -1,0 +1,10 @@
+<div id="item" *ngIf="address.id>0">
+      <h3>{{ address.city }} <span>{{address.zip_code}}</span></h3>
+      <div style="display: flex;flex-direction: column;">
+        <div>{{ address.street }}</div>
+        <div>{{ address.country }}</div>
+        <p>{{ address.additionnalInfo }}</p>
+        <button class="btnStyle" (click)="removeAddress(address)">Delete</button>
+      </div>
+        
+  </div>

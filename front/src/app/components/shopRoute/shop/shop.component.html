@@ -1,0 +1,11 @@
+<div>
+  <app-searchbar (setList)="setList($event)"></app-searchbar>
+  <div id="listItem">
+    <app-shop-item *ngFor="let product of products" [product]="product"></app-shop-item>
+    <div *ngIf="products.length == 0">
+      <h3>Pas de résultat</h3>
+    </div>
+  </div>
+
+</div>
+
