@@ -14,7 +14,7 @@ export class ProductService {
 
 
   public All(): Observable<any> {
-    return this.http.get<any>('https://tp05-tritschberger-antoine.herokuapp.com/api/products');
+    return this.http.get<any>('https://projet-tritschberger-antoine.herokuapp.com/api/products');
   }
 
   public Get(id: number): Observable<any> {
@@ -24,7 +24,7 @@ export class ProductService {
       }),
     };
 
-    return this.http.get<any>('https://tp05-tritschberger-antoine.herokuapp.com/api/products/' + id, httpOptions);
+    return this.http.get<any>('https://projet-tritschberger-antoine.herokuapp.com/api/products/' + id, httpOptions);
   }
 
 

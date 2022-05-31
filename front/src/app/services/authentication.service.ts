@@ -22,7 +22,7 @@ export class AuthenticationService {
     data.set('login',login);
     data.set('password',password);
 
-    return this.http.post<any>('https://tp05-tritschberger-antoine.herokuapp.com/api/signin', data.toString(), httpOptions);
+    return this.http.post<any>('https://projet-tritschberger-antoine.herokuapp.com/api/signin', data.toString(), httpOptions);
   }
 
   public signup(user:User): Observable<any> {
@@ -37,6 +37,6 @@ export class AuthenticationService {
       data.set(prop[i].toString(),Reflect.get(user,prop[i].toString()));
     }
 
-    return this.http.post<any>('https://tp05-tritschberger-antoine.herokuapp.com/api/signup', data.toString(), httpOptions);
+    return this.http.post<any>('https://projet-tritschberger-antoine.herokuapp.com/api/signup', data.toString(), httpOptions);
   }
 }
