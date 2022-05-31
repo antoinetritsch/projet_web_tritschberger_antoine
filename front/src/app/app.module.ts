@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -19,19 +19,22 @@ import { HomeComponent } from './components/home/home.component';
 import { LeftmenuComponent } from './components/leftmenu/leftmenu.component';
 import { ShopItemComponent } from './components/shopRoute/shop-item/shop-item.component';
 import { CartItemComponent } from './components/shopRoute/cart-item/cart-item.component';
-import { SigninComponent } from './components/loginRoute/signin/signin.component';
-import { SignupComponent } from './components/loginRoute/signup/signup.component';
+import { SigninComponent } from './components/userRoute/signin/signin.component';
+import { SignupComponent } from './components/userRoute/signup/signup.component';
+import { AuthenticationService } from './services/authentication.service';
+import { ApiHttpInterceptor } from './api/api-httpinterceptor';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import {AuthGuard} from './services/auth-gard';
+import { ProductService } from './services/product.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   {
-    path: 'login',
+    path: 'user',
     loadChildren: () =>
-      import('./components/loginRoute/login.module').then(
-        (m) => m.LoginModule
+      import('./components/userRoute/user.module').then(
+        (m) => m.UserModule
       ),
   },
   {
@@ -69,8 +72,8 @@ const routes: Routes = [
     ShopItemComponent,
     CartItemComponent,
     SigninComponent,
-    SignupComponent,
-    PhoneNumberPipe
+    PhoneNumberPipe,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,12 @@ const routes: Routes = [
     NgxsModule.forRoot([DataState]),
     RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    ProductService,
+    ApiHttpInterceptor,
+    { provide: HTTP_INTERCEPTORS, useClass: ApiHttpInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

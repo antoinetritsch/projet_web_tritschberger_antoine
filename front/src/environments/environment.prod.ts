@@ -1,4 +1,7 @@
+
+
+
 export const environment = {
-  production: true,
-  baseUrl: 'assets/mock/shop.json',
+  production: false,
+  baseUrl: 'https://tp05-tritschberger-antoine.herokuapp.com/api',
 };

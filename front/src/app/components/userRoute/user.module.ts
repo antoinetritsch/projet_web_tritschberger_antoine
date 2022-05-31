@@ -12,4 +12,4 @@ const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes)],
 })
-export class LoginModule {}
+export class UserModule {}

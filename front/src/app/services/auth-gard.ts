@@ -1,30 +1,19 @@
-import { UserState } from '../shared/states/user_state';
+import { ApiHttpInterceptor } from '../api/api-httpinterceptor';
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Store } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-    constructor(private router: Router, private store: Store) {}
+    constructor(private router: Router, private httpInterceptor: ApiHttpInterceptor) {}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        return this.store.select(UserState.getJWTToken)
-            .pipe(
-                mergeMap(
-                    (jwt: string): Observable<boolean> => {
-                        if (jwt === '') {
-                            return of(false);
-                        } else {
-                            return of(true);
-                        }
-                    }
-                )
-            );
+    canActivate(){
+        if(!this.httpInterceptor.isAuthenticated()){
+            this.router.navigate(['user/signin']);
+        }
+        return this.httpInterceptor.isAuthenticated();
     }
 
 }

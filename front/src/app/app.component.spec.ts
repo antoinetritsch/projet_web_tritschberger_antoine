@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'projet_tritschberger_antoine'`, () => {
+  it(`should have as title 'tp04_tritschberger_antoine'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('projet_tritschberger_antoine');
+    expect(app.title).toEqual('tp04_tritschberger_antoine');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('projet_tritschberger_antoine app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('tp04_tritschberger_antoine app is running!');
   });
 });

@@ -5,11 +5,11 @@ use Slim\Factory\AppFactory;
 use Tuupola\Middleware\HttpBasicAuthentication;
 use \Firebase\JWT\JWT;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . './../vendor/autoload.php';
 
-require_once __DIR__ . '/bootstrap.php';
-require_once __DIR__ . '/src/User.php';
-require_once __DIR__ . '/src/Product.php';
+require_once __DIR__ . './../bootstrap.php';
+require_once __DIR__ . './../src/User.php';
+require_once __DIR__ . './../src/Product.php';
 
 const JWT_SECRET = "iuegfilezgerrvkefnvkjnrejkgnkrenireng";
 
@@ -32,22 +32,17 @@ function createJWT(Response $response,$login) : Response{
 function addHeaders($response) {
     $response = $response->withHeader("Content-Type", "application/json")
         ->withHeader("Access-Control-Allow-Origin", "*")
-        ->withHeader("Access-Control-Allow-Headers", "*")
+        ->withHeader("Access-Control-Allow-Headers", "Authorization")
+		->withHeader("Access-Control-Expose-Headers", "Authorization")
         ->withHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
     return $response;
 }
 
 
-$app->get('/api/hello/{name}', function (Request $request, Response $response, $args) {
-    $array ["nom"] = $args ['name'];
-    $response->getBody()->write(json_encode ($array));
-	$response = addHeaders($response);
-    return $response;
-});
 
 $app->get('/api/whoami', function(Request $request, Response $response, $args){
 	$authHeader = $request->getHeaderLine('authorization');
-	 $arr = explode(' ', $authHeader);
+	$arr = explode(' ', $authHeader);
 
         if (count($arr) != 2)  return $response->withStatus(400);
 
@@ -58,7 +53,7 @@ $app->get('/api/whoami', function(Request $request, Response $response, $args){
 		global $entityManager;
 		$userRepository = $entityManager->getRepository('User');
 		$user = $userRepository->findOneBy(array(
-        'login' => $body['login']
+        'login' => $login
     ));
 	if($user){
 		$res = [
@@ -69,7 +64,6 @@ $app->get('/api/whoami', function(Request $request, Response $response, $args){
             'zipCode' => $user->getCodepostal(),
             'city' => $user->getCity(),
             'country' => $user->getCountry(),
-            'email' => $user->getEmail(),
             'phone' => $user->getPhonenumber(),
             'login' => $user->getLogin()
         ];
@@ -125,6 +119,8 @@ $app->post('/api/signup', function(Request $request, Response $response, $args){
 });
 
 
+
+
 $app->post('/api/signin', function (Request $request, Response $response, $args) {	
 	$body = $request->getParsedBody();
 	global $entityManager;
@@ -132,14 +128,16 @@ $app->post('/api/signin', function (Request $request, Response $response, $args)
     $user = $userRepository->findOneBy(array(
         'login' => $body['login']
     ));
-	
+
     if($user && password_verify($body['password'], $user->getPassword())){
         $response = createJWT($response,$body['login']);
         $response->getBody()->write(json_encode(true));
+		$response = $response->withStatus(200);
     }
     else{
         $response = $response->withStatus(401);
     }
+	$response = addHeaders($response);
     return $response;
 });
 
@@ -149,10 +147,24 @@ $app->get('/api/products', function (Request $request, Response $response, $args
     $productRepository = $entityManager->getRepository('Product');
     $all = $productRepository->findAll();
 	$response = $response->withStatus(200);
-	$response = addHeaders($response);
     $response->getBody()->write(json_encode($all));
+	$response = addHeaders($response);
     return $response;
 });
+
+$app->get('/api/products/{id}', function (Request $request, Response $response, $args) {
+	global $entityManager;
+    $productRepository = $entityManager->getRepository('Product');
+    $prod = $productRepository->findOneBy(array(
+        'idProduct' => $args['id']
+    ));
+	
+	$response = $response->withStatus(200);
+	$response = addHeaders($response);
+    $response->getBody()->write(json_encode($prod));
+    return $response;
+});
+
 
 
 

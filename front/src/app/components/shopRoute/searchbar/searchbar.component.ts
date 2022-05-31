@@ -2,7 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Form, FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/shared/models/product';
-import { ListService } from 'src/app/services/list.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -18,7 +18,7 @@ export class SearchbarComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private listService: ListService
+    private productService: ProductService
   ) {
     this.searchbarForm = this.formBuilder.group({
       research: ['']
@@ -29,23 +29,25 @@ export class SearchbarComponent implements OnInit {
     this.setList.emit(list);
   }
 
-  ngOnInit(): void {
-    this.subscription = this.listService.getList().subscribe((list: Product[]) => {
+  reset(){
+    this.subscription = this.productService.All().subscribe((list: Product[]) => {
       this.updateList(list);
     });
   }
 
+  ngOnInit(): void {
+    this.reset();
+  }
+
   handleResearch(): void {
-    this.subscription = this.listService.getList().subscribe((list: Product[]) => {
-      if (this.searchbarForm.value.research) {
-        list = list.filter((item: Product) => {
-          return item.name
-            .toLowerCase()
-            .includes(this.searchbarForm.value.research.toLowerCase());
-        });
-      }
-      this.updateList(list);
-    });
+    if (this.searchbarForm.value.research && this.searchbarForm.value.research.length >= 3) {
+      this.subscription = this.productService.Filter(this.searchbarForm.value.research).subscribe((list: Product[]) => {
+        this.updateList(list);
+      });
+    }
+    else if(this.searchbarForm.value.research==null || this.searchbarForm.value.research.length ==0){
+      this.reset();
+    }
   }
 
   ngOnDestroy(): void {

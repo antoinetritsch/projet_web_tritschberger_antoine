@@ -7,14 +7,12 @@ class User {
     civilite: string;
     login: string;
     country: string;
-    old : number;
     phoneNumber:string;
     password:string;
 
-    constructor(name: string, lastname: string,old:number,phoneNumber:string,address: string,codePostal: number,city: string,login: string,civilite: string,country: string,password: string) {
+    constructor(name: string, lastname: string,phoneNumber:string,address: string,codePostal: number,city: string,login: string,civilite: string,country: string,password: string) {
         this.name = name;
         this.lastname = lastname;
-        this.old=old;
         this.phoneNumber=phoneNumber;
         this.address=address;
         this.codePostal=codePostal;
@@ -26,10 +24,10 @@ class User {
     }
 
     ToString():string{
-        return this.name+" "+this.lastname+" "+this.old+" "+this.phoneNumber;
+        return this.name+" "+this.lastname+" "+this.phoneNumber;
     }
     IsNull():boolean{
-        return this.name=="" && this.lastname==""&& this.old==0 && this.phoneNumber=="" && this.address=="" && this.codePostal==0 && this.city=="" && this.country=="" && this.login=="" && this.password=="" && this.civilite=="";
+        return this.name=="" && this.lastname==""&&  this.phoneNumber=="" && this.address=="" && this.codePostal==0 && this.city=="" && this.country=="" && this.login=="" && this.password=="" && this.civilite=="";
     }
     IsNameCorrect():String{
         if(this.name.length>0 && this.name == this.name.toUpperCase()){
@@ -44,12 +42,6 @@ class User {
             return '';
         }
         return "Prénom obligatoire";
-    }
-    IsOldCorrect():String{
-        if(this.old>=0){
-            return '';
-        }
-        return "Age supérieur à 0 !";
     }
     IsNumberCorrect():String{
         if(this.phoneNumber.toString().length==10){
@@ -83,7 +75,6 @@ class User {
     IsCorrect():String{
         var nameVerif : String =this.IsNameCorrect();
         var lastnameVerif : String =this.IsLastNameCorrect();
-        var oldVerif : String =this.IsOldCorrect();
         var numberVerif : String =this.IsNumberCorrect();
 
         var loginVerif : String =this.IsLoginCorrect();
@@ -97,10 +88,6 @@ class User {
 
         if(lastnameVerif!=''){
             return lastnameVerif;
-        }
-
-        if(oldVerif!=''){
-            return oldVerif;
         }
 
         if(numberVerif!=''){

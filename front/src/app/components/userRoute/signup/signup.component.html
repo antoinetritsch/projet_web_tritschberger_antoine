@@ -15,7 +15,6 @@
     <label [ngStyle]="{'color':user.IsLastNameCorrect() == '' ? 'black' : 'red' }">Prénom* : <input name="lastname" [(ngModel)]="user.lastname" type="text" /></label><br />
     <label [ngStyle]="{'color':user.IsNumberCorrect() == '' ? 'black' : 'red' }">Numéro de téléphone* : <input name="phoneNumber" [(ngModel)]="user.phoneNumber" type="tel" /></label><br />
     <label>{{user.phoneNumber | phoneNumber}}</label><br />
-    <label [ngStyle]="{'color':user.IsOldCorrect() == '' ? 'black' : 'red' }">Age* : <input name="old" [(ngModel)]="user.old" type="number" /></label><br />
     <label>Adresse : <input name="address" [(ngModel)]="user.address" type="text" /></label><br />
     <label>Code postal : <input name="codePostal" [(ngModel)]="user.codePostal" type="number" /></label><br />
     <label>Ville : <input name="city" [(ngModel)]="user.city" type="text" /></label><br />

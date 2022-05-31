@@ -1,8 +1,8 @@
-<div id="item" *ngIf="product.id != ''">
+<div id="item" *ngIf="product.idProduct > 0">
     <h3>{{ product.name }} <span>{{ product.price }}€</span></h3>
     <div id="sousItem">
         <button class="btnStyle" (click)="AddToCart()">Ajouter au panier</button>
-        <a class="btnStyle" [routerLink] = "['/product/product',product.id]" >Voir le détail</a>
+        <a class="btnStyle" [routerLink] = "['/product/product',product.idProduct]" >Voir le détail</a>
     </div>
     
 </div>

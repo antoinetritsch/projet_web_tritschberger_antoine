@@ -9,7 +9,7 @@ import {
   DeleteProduct
 } from 'src/app/shared/actions/product.action';
 import { ActivatedRoute } from '@angular/router';
-import { ListService } from 'src/app/services/list.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -24,19 +24,16 @@ export class ProductDetailComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private listService: ListService,
+    private productService: ProductService,
     private store: Store
   ) {
+
     var id = this.route.snapshot.params['id'];
-    this.listService
-      .getList()
-      .subscribe((list: Product[]) => {
-        const selectedProduct = list.find((product) => product.id === id);
-        if (selectedProduct) {
-          this.product = selectedProduct;
-        } else {
-          this.error = true;
-        }
+    
+    this.productService
+      .Get(id)
+      .subscribe((prod: Product) => {
+          this.product = prod;
       });
   }
 

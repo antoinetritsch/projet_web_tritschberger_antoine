@@ -1,8 +1,8 @@
-<div style="width: 100%;margin-top: 20px;" id="item" *ngIf="product.id != ''">
+<div style="width: 100%;margin-top: 20px;" id="item" *ngIf="product.idProduct >0">
     <h3>{{ product.name }} {{ product.price }}€</h3>
     <div style="display: flex;flex-direction: column;align-items: center;">
         <div>Description : {{ product.description }}</div>
-        <div style="margin:10px">
+        <div style="margin:10px">   
             <button class="btnStyle" (click)="AddToCart()">Ajouter au panier</button>
             <a class="btnStyle" [routerLink] = "['/product/shop']" >Retour</a>
         </div>
